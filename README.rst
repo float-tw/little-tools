@@ -21,3 +21,15 @@ sm.py
 screem message python version
 
 ``$ ./sm.py``
+
+ibus_restart.sh
+---------------
+
+just run ``./ibus_restart``
+
+remove_old_kernel.sh
+--------------------
+
+just run ``./remove_old_kernel.sh``
+
+and select kernel to remove
