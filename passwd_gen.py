@@ -16,5 +16,6 @@ else:
 	num = 1
 
 for i in range(num):
-	newpasswd = ''.join( Random().sample(string.letters+string.digits, passwd_len) )
+	#newpasswd = ''.join( Random().sample(string.letters+string.digits, passwd_len) )
+	newpasswd = ''.join( Random().sample(string.lowercase, passwd_len) )
 	print newpasswd
