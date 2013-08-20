@@ -1,9 +1,12 @@
 #!/bin/bash
-kernel=(`dpkg -l | grep linux-image | awk '{print $2}'`)
-kernel_num=${#kernel[*]}
-for id in ${!kernel[*]}
+l_i="linux-image"
+l_h="linux-headers"
+gen="generic"
+kernel_version=(`dpkg -l | grep -Po '(?<=linux-image-).*(?=-generic)'`)
+kernel_num=${#kernel_version[*]}
+for id in ${!kernel_version[*]}
 do
-	echo "($id) ${kernel[$id]}"
+	echo "($id) $l_i-${kernel_version[$id]}-$gen"
 done
 
 check='X'
@@ -30,7 +33,7 @@ do
 		echo 'index ouput of range'
 		exit
 	fi
-	echo ${kernel[$id]}
+	echo $l_i-${kernel_version[$id]}-$gen
 done
 
 yn="X"
@@ -42,6 +45,6 @@ done
 if [ "$yn" == "y" -o "$yn" == "Y" ]; then
 	for id in ${each_input[*]}
 	do
-		sudo apt-get purge ${kernel[$id]}
+		sudo apt-get purge $l_i-${kernel_version[$id]}-$gen $l_h-${kernel_version[$id]}
 	done
 fi
