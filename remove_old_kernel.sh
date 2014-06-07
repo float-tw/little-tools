@@ -42,9 +42,11 @@ do
 	read -p "delete above kernel?[y/N]:" yn
 done
 
+all_need_remove=""
 if [ "$yn" == "y" -o "$yn" == "Y" ]; then
 	for id in ${each_input[*]}
 	do
-		sudo apt-get purge $l_i-${kernel_version[$id]}-$gen $l_h-${kernel_version[$id]}
+		all_need_remove+=" $l_i-${kernel_version[$id]}-$gen $l_h-${kernel_version[$id]}"
 	done
+	sudo apt-get purge $all_need_remove
 fi
